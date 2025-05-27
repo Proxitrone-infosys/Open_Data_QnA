@@ -118,18 +118,12 @@ Download Python: https://www.python.org/downloads/
 Install the dependencies by running the poetry commands below 
 
 ```
-# Install poetry
-pip uninstall poetry -y
-pip install poetry --quiet
+# Install uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
-#Run the poetry commands below to set up the environment
-poetry lock #resolve dependecies (also auto create poetry venv if not exists)
-poetry install --quiet #installs dependencies
-poetry env info #Displays the evn just created and the path to it
-
-poetry shell #this command should activate your venv and you should see it enters into the venv
-
-##inside the activated venv shell []
+#Run the uv commands below to set up the environment
+uv lock #resolve dependecies (also auto create poetry venv if not exists)
+uv sync #Install dependencies
 
 #If you are running on Worbench instance where the service account used has required permissions to run this solution you can skip the below gcloud auth commands and get to next kernel creation section
 
@@ -157,9 +151,10 @@ Proceed to the Step 1 below
 Create Kernel for with the envrionment created
 
 ```
-pip install jupyter
+source .venv/bin/activate
+uv pip install ipykernel
 
-ipython kernel install --name "openqna-venv" --user 
+uv run python ipython kernel install --name "venv_qna" --user 
 
 ```
 
