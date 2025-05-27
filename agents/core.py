@@ -59,7 +59,7 @@ class Agent(ABC):
         elif model_id == 'gemini-1.5-flash':
             with telemetry.tool_context_manager('opendataqna'):
                 # print("Model is gemini 1.5 flash")
-                self.model = GenerativeModel("gemini-1.5-flash-preview-0514")
+                self.model = GenerativeModel("gemini-1.5-flash-001")
                 self.safety_settings: Optional[dict] = {
                 HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
                 HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
@@ -77,10 +77,31 @@ class Agent(ABC):
                 HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
                 HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
             }
-        
+                
+        elif model_id == 'gemini-2.0-flash-lite':
+            with telemetry.tool_context_manager('opendataqna'):
+                # print("Model is gemini 2.0 Flash Lite")
+                self.model = GenerativeModel("gemini-2.0-flash-lite-001")
+                self.safety_settings: Optional[dict] = {
+                HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
+                HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
+                HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
+                HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
+            }
+        elif model_id == 'gemini-2.0-flash':
+            with telemetry.tool_context_manager('opendataqna'):
+                # print("Model is gemini 2.0 Flash")
+                self.model = GenerativeModel("gemini-2.0-flash-001")
+                self.safety_settings: Optional[dict] = {
+                HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
+                HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
+                HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
+                HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
+            }
         else:
             raise ValueError("Please specify a compatible model.")
-
+            
+            
     def generate_llm_response(self,prompt):
         context_query = self.model.generate_content(prompt,safety_settings=self.safety_settings,stream=False)
         return str(context_query.candidates[0].text).replace("```sql", "").replace("```", "").rstrip("\n")

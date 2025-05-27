@@ -52,7 +52,11 @@ def save_config(embedding_model,
     if not 'root_dir' in locals():  # If not found in any parent dir
         raise FileNotFoundError("config.ini not found in current or parent directories.")
 
-
+    config['GCP'] = {}
+    config['CONFIG'] = {}
+    config['PGCLOUDSQL'] = {}
+    config['BIGQUERY'] = {}
+    
     config['GCP']['PROJECT_ID'] = PROJECT_ID
     # config['CONFIG']['DATA_SOURCE'] = data_source
     config['CONFIG']['VECTOR_STORE'] = vector_store
@@ -62,18 +66,18 @@ def save_config(embedding_model,
 
 
     # Save the parameters based on Vector Store Choices
-    if vector_store == 'cloudsql-pgvector':
-        config['PGCLOUDSQL']['PG_INSTANCE'] = pg_instance
-        config['PGCLOUDSQL']['PG_DATABASE'] = pg_database
-        config['PGCLOUDSQL']['PG_USER'] = pg_user
-        config['PGCLOUDSQL']['PG_PASSWORD'] = pg_password
-        config['PGCLOUDSQL']['PG_REGION'] = pg_region
+    # if vector_store == 'cloudsql-pgvector':
+    config['PGCLOUDSQL']['PG_INSTANCE'] = pg_instance
+    config['PGCLOUDSQL']['PG_DATABASE'] = pg_database
+    config['PGCLOUDSQL']['PG_USER'] = pg_user
+    config['PGCLOUDSQL']['PG_PASSWORD'] = pg_password
+    config['PGCLOUDSQL']['PG_REGION'] = pg_region
         # config['PGCLOUDSQL']['PG_SCHEMA'] = pg_schema
 
-    if vector_store := 'bigquery':
-        config['BIGQUERY']['BQ_DATASET_REGION'] = bq_dataset_region
-        config['BIGQUERY']['BQ_OPENDATAQNA_DATASET_NAME'] = bq_opendataqna_dataset_name
-        config['BIGQUERY']['BQ_LOG_TABLE_NAME'] = bq_log_table_name
+    # if vector_store == 'bigquery-vector':
+    config['BIGQUERY']['BQ_DATASET_REGION'] = bq_dataset_region
+    config['BIGQUERY']['BQ_OPENDATAQNA_DATASET_NAME'] = bq_opendataqna_dataset_name
+    config['BIGQUERY']['BQ_LOG_TABLE_NAME'] = bq_log_table_name
 
     if logging: 
         config['CONFIG']['LOGGING'] = 'yes'

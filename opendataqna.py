@@ -591,7 +591,8 @@ async def embed_sql(session_id,user_grouping,user_question,generate_sql):
 
 def visualize(session_id,user_question,generated_sql,sql_results):
     try:
-        Rewriter=ResponseAgent('gemini-1.5-pro')
+        # TODO: Pass model str as a param here
+        Rewriter=ResponseAgent('gemini-2.0-flash')
         
         if session_id is None or session_id=="":
             print("This is a new session")
