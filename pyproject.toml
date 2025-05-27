@@ -1,44 +1,55 @@
-[tool.poetry]
+[project]
 name = "opendataqna"
 version = "0.1.0"
 description = ""
-authors = ["msubasioglu","l-sri","orpzs"]
-license = "Apache 2.0"
+authors = [
+    { name = "msubasioglu" },
+    { name = "l-sri" },
+    { name = "orpzs" },
+]
+requires-python = "!=3.9.7,~=3.9"
 readme = "README.md"
+license = { text = "Apache 2.0" }
+dependencies = [
+    "google<4.0.0,>=3.0.0",
+    "google-api-python-client<3.0.0,>=2.120.0",
+    "google-cloud<1.0.0,>=0.34.0",
+    "google-cloud-aiplatform<2.0.0,>=1.43.0",
+    "pandas<3.0.0,>=2.2.1",
+    "pandas-gbq<1.0.0,>=0.21.0",
+    "cloud-sql-python-connector[asyncpg]<2.0.0,>=1.7.0",
+    "sqlalchemy<3.0.0,>=2.0.27",
+    "pgvector<1.0.0,>=0.2.5",
+    "pg8000<2.0.0,>=1.30.5",
+    "tabulate<1.0.0,>=0.9.0",
+    "langchain<1.0.0,>=0.1.9",
+    "fsspec<2025.0.0,>=2024.2.0",
+    "gcsfs<2025.0.0,>=2024.2.0",
+    "streamlit<2.0.0,>=1.32.2",
+    "google-cloud-bigquery<4.0.0,>=3.17.2",
+    "google-cloud-bigquery-connection<2.0.0,>=1.15.3",
+    "pyarrow<16.0.0,>=15.0.2",
+    "Flask[async]<3.0.0,>=2.1.0",
+    "gunicorn<21.0.0,>=20.1.0",
+    "flask-cors<5.0.0,>=4.0.0",
+    "Werkzeug<3.0.0,>=2.3.7",
+    "google-cloud-firestore<3.0.0,>=2.16.0",
+    "firebase-admin<6.0.0,>=5.2.0",
+    "langchain_community",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.9, <3.9.7 || >3.9.7, <4.0"
-google = "^3.0.0"
-google-api-python-client = "^2.120.0"
-google-cloud = "^0.34.0"
-google-cloud-aiplatform = "^1.43.0"
-pandas = "^2.2.1"
-pandas-gbq = "^0.21.0"
-cloud-sql-python-connector = {extras = ["asyncpg"], version = "^1.7.0"}
-sqlalchemy = "^2.0.27"
-pgvector = "^0.2.5"
-pg8000 = "^1.30.5"
-tabulate = "^0.9.0"
-langchain = "^0.1.9"
-fsspec = "^2024.2.0"
-gcsfs = "^2024.2.0"
-streamlit = "^1.32.2"
-google-cloud-bigquery = "^3.17.2"
-google-cloud-bigquery-connection = "^1.15.3"
-pyarrow = "^15.0.2"
-Flask = { version = "^2.1.0", extras = ["async"]}
-gunicorn = "^20.1.0"
-flask-cors = "^4.0.0"
-Werkzeug = "^2.3.7"
-google-cloud-firestore= "^2.16.0"
-firebase-admin = "^5.2.0"
+[dependency-groups]
+dev = [
+    "pyzmq<26.0.0",
+    "ipykernel>=6.29.3,<7",
+]
 
-
-
-[tool.poetry.group.dev.dependencies]
-pyzmq ="<26.0.0"
-ipykernel = "^6.29.3"
+[tool.pdm.dev-dependencies]
+dev = [
+    "pyzmq<26.0.0",
+    "ipykernel<7.0.0,>=6.29.3",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
